@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package transport;
+
+option java_package = "io.github.scorsero.transport";
+
+message TransportEnvelope {
+  int64 time = 1;
+  EnvelopeType type = 2;
+  bytes data = 3;
+
+  enum EnvelopeType {
+    PING = 0;
+    LOGIN_REQUEST = 1;
+    LOGIN_RESPONSE = 2;
+    MESSAGE = 3;
+  }
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string token = 1;
+  int64 expirationTime = 2;
+}
+
+enum MessageType {
+  STATUS = 0;
+  OPERATE_SCORE = 1;
+}
+
+message MessageEnvelope {
+  MessageType type = 1;
+  bytes data = 2;
+}
